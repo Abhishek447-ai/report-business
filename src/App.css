@@ -28,7 +28,12 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+.rotating-sun {
+  animation: spinSun 15s linear infinite;
+  display: block;
+}
+
+@keyframes spinSun {
   from {
     transform: rotate(0deg);
   }
@@ -36,3 +41,27 @@
     transform: rotate(360deg);
   }
 }
+body {
+  margin: 0;
+  padding: 0;
+  background: #F7F4EF;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
+@keyframes scrollText {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
