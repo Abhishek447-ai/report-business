@@ -59,7 +59,7 @@ if (chapterBlobPreview && chapterRef.current) {
     
   }, 
   
-  [frontPageBlob]);
+  [frontPageBlob, ackBlobPreview, downloadChapter1PreviewBlob, chapterBlobPreview]);
   if (!report) return null
   
   return (

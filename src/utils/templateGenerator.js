@@ -141,8 +141,8 @@ export const generateTemplate = async ({
 
     const blob = zip.generate({ type: "blob" });
 
- return blob;
  console.log("TEMPLATE BLOB =", blob);
+ return blob;
   } catch (error) {
     console.log("DOCXTEMPLATER ERROR", error);
 
