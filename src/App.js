@@ -1,5 +1,4 @@
 import StudentForm from "./components/StudentForm";
-import PreviewPage from "./pages/PreviewPage";
 import "./App.css";
 
 function App() {

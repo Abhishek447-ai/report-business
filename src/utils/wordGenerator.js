@@ -1,6 +1,3 @@
-import { parseReport } from "./reportParser";
-import {SimpleField,} from "docx";
-
 import {
   Document,
   Packer,

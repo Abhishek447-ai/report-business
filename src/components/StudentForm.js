@@ -6,7 +6,7 @@
   import {generateTemplate} from "../utils/templateGenerator";
   import {generateTemplate2} from "../utils/templateGenerator2";
   import TextField from "@mui/material/TextField";
-  import Button from "@mui/material/Button";
+  
   import MenuItem from "@mui/material/MenuItem";
   import Select from "@mui/material/Select";
   import FormControl from "@mui/material/FormControl";
@@ -14,8 +14,7 @@
   import Card from "@mui/material/Card";
   import CardContent from "@mui/material/CardContent";
   import { downloadChapter1 }from "../utils/downloadChapter1";
-  import { parseReport } from "../utils/reportParser";
-  import Grid from "@mui/material/Grid";
+ 
   import PreviewPage from "../pages/PreviewPage";
 
 
