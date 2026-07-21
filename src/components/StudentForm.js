@@ -322,16 +322,22 @@ const handlePayment = async () => {
   }
 
   const orderData = await fetch(
-    "http://localhost:5000/create-order",
-    {
-      method: "POST",
-    }
-  );
+  "http://localhost:5000/create-order",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+  reportCount: Number(studentCount),
+}),
+  }
+);
 
   const order = await orderData.json();
 
   const options = {
-    key: "rzp_test_T0yt8I6rZiengC",
+    key: "rzp_live_TG1XZrcjeAxVEe",
 
     amount: order.amount,
 

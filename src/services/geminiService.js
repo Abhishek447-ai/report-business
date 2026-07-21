@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const API_KEYS = [
-   { type: "groq", key: process.env.REACT_APP_GROQ_API_KEY_2 },
+  { type: "groq", key: process.env.REACT_APP_GROQ_API_KEY_2 },
   { type: "groq", key: process.env.REACT_APP_GROQ_API_KEY_1 },
   { type: "openrouter", key: process.env.REACT_APP_OPENROUTERNSS1 },
   { type: "openrouter", key: process.env.REACT_APP_OPENROUTER100 },

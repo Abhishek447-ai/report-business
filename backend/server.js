@@ -65,8 +65,12 @@ app.get("/api/submissions", async (req, res) => {
 // Razorpay Order
 app.post("/create-order", async (req, res) => {
   try {
+    const { reportCount } = req.body;
+
+    const amount = reportCount * 200 * 100; // Razorpay expects paise
+
     const order = await razorpay.orders.create({
-      amount: 9900,
+      amount,
       currency: "INR",
       receipt: `receipt_${Date.now()}`,
     });
@@ -74,7 +78,6 @@ app.post("/create-order", async (req, res) => {
     res.json(order);
   } catch (err) {
     console.error(err);
-
     res.status(500).json({
       error: "Failed to create order",
     });
