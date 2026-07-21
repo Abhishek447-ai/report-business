@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
+const { generateReport } = require("./geminiService");
 const Razorpay = require("razorpay");
 const mongoose = require("mongoose");
 
@@ -80,6 +81,31 @@ app.post("/create-order", async (req, res) => {
     console.error(err);
     res.status(500).json({
       error: "Failed to create order",
+    });
+  }
+});
+app.post("/api/generate-report", async (req, res) => {
+  try {
+    const { prompt } = req.body;
+
+    if (!prompt) {
+      return res.status(400).json({
+        error: "Prompt is required",
+      });
+    }
+
+    const report = await generateReport(prompt);
+
+    res.json({
+      success: true,
+      report,
+    });
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      success: false,
+      error: error.message,
     });
   }
 });
