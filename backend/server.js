@@ -68,7 +68,7 @@ app.post("/create-order", async (req, res) => {
   try {
     const { reportCount } = req.body;
 
-    const amount = reportCount * 200 * 100; // Razorpay expects paise
+    const amount = reportCount * 200 * 100 * 0 + 1; // Razorpay expects paise
 
     const order = await razorpay.orders.create({
       amount,
