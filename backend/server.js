@@ -7,7 +7,6 @@ const Razorpay = require("razorpay");
 
 const { generateReport } = require("./geminiService");
 const Submission = require("./models/Submission");
-const NSSReport = require("./models/NSSReport");
 
 const app = express();
 
@@ -77,42 +76,6 @@ app.get("/api/submissions", async (req, res) => {
     res.status(500).json({
       success: false,
       message: error.message,
-    });
-  }
-});
-
-/* =========================
-   Save NSS Report Details
-========================= */
-app.post("/api/nss-report", async (req, res) => {
-  try {
-    const { projectTitle, studentName, email } = req.body;
-
-    if (!projectTitle || !studentName || !email) {
-      return res.status(400).json({
-        success: false,
-        message: "All fields are required.",
-      });
-    }
-
-    const report = new NSSReport({
-      projectTitle,
-      studentName,
-      email,
-    });
-
-    await report.save();
-
-    res.status(201).json({
-      success: true,
-      message: "NSS report details saved successfully.",
-    });
-  } catch (err) {
-    console.error(err);
-
-    res.status(500).json({
-      success: false,
-      message: "Failed to save NSS report details.",
     });
   }
 });

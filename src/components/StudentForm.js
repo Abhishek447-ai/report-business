@@ -174,15 +174,16 @@
     await generateNSSReport(
       activityTitle
     );
-      await fetch("https://report-business.onrender.com/api/nss-report", {
+      await fetch("https://report-business.onrender.com/api/submissions", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
   },
   body: JSON.stringify({
-    projectTitle: activityTitle,
-    studentName: students.map((student) => student.name).join(", "),
-    email: studentEmail,
+    activityTitle,
+    studentEmail,
+    studentCount: Number(studentCount),
+    studentNames: students.map((student) => student.name),
   }),
 });
       const {
