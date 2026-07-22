@@ -21,7 +21,7 @@ const extractSections = (content) => {
 
 export const generateNSSReport = async (activityTitle) => {
   const response = await fetch(
-  "https://business-backend-dfxj.onrender.com/api/generate-report",
+  "https://report-business.onrender.com/api/generate-report",
   {
     method: "POST",
     headers: {
