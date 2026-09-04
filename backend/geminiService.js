@@ -4,8 +4,8 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const OpenAI = require("openai");
 
 // ---------------- GEMINI ----------------
-async function tryGemini(prompt) {
-  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+async function tryGemini(apiKey, prompt) {
+  const genAI = new GoogleGenerativeAI(apiKey);
 
   const model = genAI.getGenerativeModel({
     model: "gemini-2.5-flash",
@@ -16,7 +16,7 @@ async function tryGemini(prompt) {
 }
 
 // ---------------- OPENROUTER ----------------
-async function tryOpenRouter(apiKey) {
+async function tryOpenRouter(apiKey, prompt) {
   const client = new OpenAI({
     apiKey,
     baseURL: "https://openrouter.ai/api/v1",
@@ -58,25 +58,46 @@ async function tryGroq(apiKey, prompt) {
 // ---------------- MAIN ----------------
 async function generateReport(prompt) {
   const providers = [
+    // Account 1 - Gemini
     {
-      name: "Gemini",
-      fn: () => tryGemini(prompt),
+      name: "Gemini 1",
+      fn: () =>
+        tryGemini(process.env.gemini_okali_100, prompt),
     },
+
+    // Account 2 - Gemini
+    {
+      name: "Gemini 2",
+      fn: () =>
+        tryGemini(process.env.gemini_nss1, prompt),
+    },
+
+    // Account 1 - OpenRouter
     {
       name: "OpenRouter 1",
-      fn: () => tryOpenRouter(process.env.OPENROUTER100, prompt),
+      fn: () =>
+        tryOpenRouter(process.env.openrouter_okali_100, prompt),
     },
+
+    // Account 2 - OpenRouter
     {
       name: "OpenRouter 2",
-      fn: () => tryOpenRouter(process.env.OPENROUTERNSS1, prompt),
+      fn: () =>
+        tryOpenRouter(process.env.openrouter_nss_1, prompt),
     },
+
+    // Account 1 - Groq
     {
       name: "Groq 1",
-      fn: () => tryGroq(process.env.GROQ_API_KEY_1, prompt),
+      fn: () =>
+        tryGroq(process.env.groq_okali_100, prompt),
     },
+
+    // Account 2 - Groq
     {
       name: "Groq 2",
-      fn: () => tryGroq(process.env.GROQ_API_KEY_2, prompt),
+      fn: () =>
+        tryGroq(process.env.groq_nss_1, prompt),
     },
   ];
 
