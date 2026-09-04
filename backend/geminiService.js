@@ -212,6 +212,7 @@ SECTION 3 - CHAPTER 3
 Return:
 
 
+
 Generate a COMPLETE SEVEN-DAY NSS ACTIVITY REPORT.
 
 The report MUST contain exactly:
@@ -346,7 +347,7 @@ Return:
 Write a VERY DETAILED reflection section.
 
 TARGET LENGTH:
-Approximately 600-800 words.
+Approximately 400-430 words.
 
 This section should be long enough to fill almost an entire Word page or more depending on the template formatting.
 
@@ -392,7 +393,7 @@ Return:
 Write a VERY DETAILED conclusion.
 
 TARGET LENGTH:
-Approximately 600-800 words.
+Approximately 400-430 words.
 
 The conclusion must be long enough to fill almost an entire Word page or more depending on the template formatting.
 
@@ -459,7 +460,7 @@ Return ONLY these five sections in EXACTLY this order:
 
 ===OBJECTIVE===
 
-[500-700 words]
+[400-430 words]
 
 
 ===ACTIVITY_DETAILS===
