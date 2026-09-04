@@ -73,7 +73,7 @@ async function generateReport(activityTitle) {
   // NSS AI PROMPT
   // ====================================================
 
-  const prompt = `
+ const prompt = `
 You are an expert National Service Scheme (NSS) report writer.
 
 The user provides ONLY an activity title.
@@ -81,99 +81,140 @@ The user provides ONLY an activity title.
 ACTIVITY TITLE:
 "${activityTitle}"
 
-Your task is to generate complete, professional and detailed NSS report content based ONLY on the activity title.
+Generate a COMPLETE, PROFESSIONAL, DETAILED NSS REPORT based ONLY on the activity title.
 
 ======================================================
-IMPORTANT GENERAL RULES
+IMPORTANT CONTENT REQUIREMENTS
 ======================================================
 
-1. Understand the activity from the activity title.
-2. Generate realistic, professional and meaningful NSS content.
-3. The activity title is the only factual information provided by the user.
-4. DO NOT invent specific place names.
-5. DO NOT mention any city, village, district, state, college, school, hospital, organization, street or other specific location.
-6. DO NOT invent people's names.
-7. DO NOT invent exact dates.
-8. DO NOT invent exact participant numbers.
-9. DO NOT invent fake statistics.
-10. DO NOT mention a specific location.
-11. Keep the report generic so it can be used by any NSS unit.
-12. Do not repeatedly repeat the activity title.
-13. Do not generate images.
-14. Do not generate image links.
-15. Do not generate Markdown image syntax.
-16. Do not generate image descriptions.
-17. Do not return JSON.
-18. Do not use Markdown.
-19. Do not add explanations before or after the report.
-20. Every section must contain meaningful and detailed content.
+The generated content will be inserted directly into a Microsoft Word NSS report template.
+
+Therefore, DO NOT generate short summaries.
+
+The content MUST be sufficiently detailed to properly fill the available Word document pages.
+
+Write in formal academic/report-writing English.
+
+Use complete paragraphs with good sentence structure.
+
+Do not use bullet points unless specifically requested.
+
+Do not make the content artificially repetitive just to increase length.
+
+Expand each section with meaningful details, explanations, observations, activities, learning outcomes and social relevance.
+
+======================================================
+FACTUAL RESTRICTIONS
+======================================================
+
+The ONLY factual information provided is:
+
+"${activityTitle}"
+
+Therefore:
+
+1. Base the entire report on this activity title.
+2. DO NOT invent specific place names.
+3. DO NOT mention any city name.
+4. DO NOT mention any village name.
+5. DO NOT mention any district name.
+6. DO NOT mention any state name.
+7. DO NOT mention any college/school/institution name.
+8. DO NOT mention any hospital or organization name.
+9. DO NOT invent people's names.
+10. DO NOT invent exact dates.
+11. DO NOT invent exact participant numbers.
+12. DO NOT invent fake statistics.
+13. DO NOT invent specific addresses.
+14. DO NOT invent claims that require factual evidence.
+15. Keep the report generic enough to be used by any NSS unit.
+16. Do not repeatedly repeat the activity title.
 
 ======================================================
 SECTION 1 - OBJECTIVE
 ======================================================
 
-Return exactly:
+Return:
 
 ===OBJECTIVE===
 
-Write a detailed objective for the NSS activity.
+Write a VERY DETAILED objective section.
 
-Include:
+TARGET LENGTH:
+Approximately 500-700 words.
+
+The objective should be long enough to occupy approximately one full Word page depending on the template formatting.
+
+Explain in detail:
 
 - purpose of the activity
-- importance of the activity
+- background and importance
 - social relevance
-- community benefit
-- objectives of NSS volunteers
-- expected positive impact
+- community relevance
+- awareness created through the activity
+- role of NSS volunteers
+- responsibilities of volunteers
+- expected benefits
+- expected social impact
+- educational value
+- development of social responsibility
+- connection with NSS objectives
 
+Do NOT simply list objectives.
+
+Write connected, professional paragraphs.
 
 ======================================================
 SECTION 2 - ACTIVITY DETAILS
 ======================================================
 
-Return exactly:
+Return:
 
 ===ACTIVITY_DETAILS===
 
-Write detailed content describing the overall NSS activity.
+Write a VERY DETAILED overall description of the activity.
 
-Include:
+TARGET LENGTH:
+Approximately 700-1000 words.
 
-- planning
+The section should be detailed enough to fill approximately 1 to 1.5 Word pages.
+
+Explain:
+
 - preparation
+- planning
 - organization
-- participation of NSS volunteers
-- activities performed
-- awareness or service activities
-- teamwork
+- volunteer responsibilities
 - coordination
+- materials and preparation where appropriate
+- execution of the activity
+- awareness/service activities
+- participation
 - interaction with people where appropriate
+- teamwork
+- communication
 - observations
+- challenges in a general sense
+- how volunteers responded
 - outcomes
 - social impact
+- educational value
+- overall experience
 
-Do not mention:
+Write detailed paragraphs rather than short statements.
 
-- specific places
-- specific institutions
-- people's names
-- exact dates
-- exact participant numbers
-- fake statistics
-
+Do not mention specific locations, names, dates, exact numbers or fake statistics.
 
 ======================================================
 SECTION 3 - CHAPTER 3
 ======================================================
 
-Return exactly:
+Return:
 
-===CHAPTER_3===
 
-Generate a detailed SEVEN-DAY activity report.
+Generate a COMPLETE SEVEN-DAY NSS ACTIVITY REPORT.
 
-You MUST generate exactly these seven headings:
+The report MUST contain exactly:
 
 DAY 1
 DAY 2
@@ -183,189 +224,305 @@ DAY 5
 DAY 6
 DAY 7
 
-IMPORTANT DAY RULES:
+======================================================
+DAY CONTENT LENGTH
+======================================================
 
-1. Every day must contain detailed content.
-2. Every day must be different.
-3. Do not repeat the same paragraph between days.
-4. The seven days should logically progress.
-5. Day 1 should generally cover introduction, orientation, planning and preparation.
-6. Days 2 to 6 should cover different aspects of the main activity.
-7. Day 7 should cover completion, review, outcomes and final observations.
-8. Adapt the activities to the provided activity title.
-9. Do not mention specific locations.
-10. Do not invent names.
-11. Do not invent exact dates.
-12. Do not invent exact participant numbers.
-13. Do not invent fake statistics.
-14. Do not create image content.
-15. Do not insert image links or image tags.
-16. Do not add extra headings such as "Morning", "Afternoon", "Evening" unless genuinely required by the activity.
-17. Keep the day heading on its own line.
-18. Write the content immediately after the corresponding day heading.
+Each day MUST contain approximately 350-500 words.
 
-The exact structure MUST be:
+This is VERY IMPORTANT.
+
+Do NOT generate only a short paragraph for each day.
+
+Each day should contain enough meaningful content to occupy a substantial portion of a Word page.
+
+The content should naturally explain:
+
+- activities conducted
+- preparation or execution
+- volunteer participation
+- responsibilities
+- teamwork
+- communication
+- awareness/service work
+- observations
+- interaction where appropriate
+- learning
+- outcomes
+
+Each day MUST be different.
+
+Do not repeat the same paragraph or simply change a few words.
+
+The seven days should logically progress.
+
+DAY 1:
+Focus on introduction, orientation, planning, preparation and beginning of the activity.
+
+DAY 2:
+Begin the main activity and describe the work performed.
+
+DAY 3:
+Continue the activity with a different aspect or approach.
+
+DAY 4:
+Describe another important component of the activity.
+
+DAY 5:
+Describe further implementation, participation and service/awareness work.
+
+DAY 6:
+Describe continued activity, observations, improvement and learning.
+
+DAY 7:
+Describe completion, final activities, review, outcomes, learning and overall observations.
+
+Adapt these naturally according to the activity title.
+
+======================================================
+DAY FORMAT
+======================================================
+
+Use EXACTLY this format:
 
 DAY 1
 
-[Detailed Day 1 content]
+[350-500 words of detailed content]
+
 
 DAY 2
 
-[Detailed Day 2 content]
+[350-500 words of detailed content]
+
 
 DAY 3
 
-[Detailed Day 3 content]
+[350-500 words of detailed content]
+
 
 DAY 4
 
-[Detailed Day 4 content]
+[350-500 words of detailed content]
+
 
 DAY 5
 
-[Detailed Day 5 content]
+[350-500 words of detailed content]
+
 
 DAY 6
 
-[Detailed Day 6 content]
+[350-500 words of detailed content]
+
 
 DAY 7
 
-[Detailed Day 7 content]
+[350-500 words of detailed content]
 
+IMPORTANT:
 
-The DOCX generation system will handle document formatting.
+- Keep DAY 1, DAY 2, etc. on their own line.
+- Do not add extra text to the day heading.
+- Do not use "Day One", use exactly "DAY 1".
+- Do not add Markdown bold symbols.
+- The Word generation system will make the DAY headings bold automatically.
+- Do not generate images.
+- Do not generate image links.
+- Do not generate image tags.
+- Do not generate image descriptions.
 
-The DOCX system will:
+The Word template system will insert THREE images after each day's content.
 
-- make DAY 1 through DAY 7 headings BOLD
-- place the provided image/template after each day's content
-- place THREE image placeholders/images after DAY 1 content
-- place THREE image placeholders/images after DAY 2 content
-- place THREE image placeholders/images after DAY 3 content
-- place THREE image placeholders/images after DAY 4 content
-- place THREE image placeholders/images after DAY 5 content
-- place THREE image placeholders/images after DAY 6 content
-- place THREE image placeholders/images after DAY 7 content
-
-Therefore, YOU MUST NOT generate the images yourself.
-
-Only generate the text content for each day.
-
+Therefore, generate ONLY the written content.
 
 ======================================================
 SECTION 4 - REFLECTION NOTES
 ======================================================
 
-Return exactly:
+Return:
 
 ===REFLECTION_NOTES===
 
-Write detailed reflection notes about the complete seven-day NSS activity.
+Write a VERY DETAILED reflection section.
 
-Include:
+TARGET LENGTH:
+Approximately 600-800 words.
 
-- learning gained by volunteers
+This section should be long enough to fill almost an entire Word page or more depending on the template formatting.
+
+Do NOT write a short generic reflection.
+
+Discuss in detailed paragraphs:
+
+- overall experience
+- what NSS volunteers learned
+- practical learning
+- social awareness
+- sense of responsibility
 - teamwork
 - leadership
 - communication
-- responsibility
-- social awareness
-- community service experience
+- cooperation
+- discipline
+- problem-solving
+- confidence
+- interaction with people
+- understanding of community needs
+- importance of service
 - personal development
-- lessons learned
-- overall experience
+- values developed
+- lessons learned from the activity
+- how the activity changed or strengthened the volunteers' understanding
+- overall reflection on the seven-day experience
 
+Write naturally and meaningfully.
+
+Do not repeat the same points unnecessarily.
+
+Do not mention specific places, names, dates or fake statistics.
 
 ======================================================
 SECTION 5 - CONCLUSION
 ======================================================
 
-Return exactly:
+Return:
 
 ===CONCLUSION===
 
-Write a detailed conclusion for the complete NSS activity.
+Write a VERY DETAILED conclusion.
 
-Include:
+TARGET LENGTH:
+Approximately 600-800 words.
 
-- importance of the activity
-- overall impact
-- benefits to volunteers
-- benefits to the community
+The conclusion must be long enough to fill almost an entire Word page or more depending on the template formatting.
+
+Do NOT write a short 1-2 paragraph conclusion.
+
+Discuss in detailed paragraphs:
+
+- overall importance of the activity
+- achievement of the activity objectives
+- contribution to society/community
+- benefits to NSS volunteers
+- awareness created
 - skills developed
-- overall outcome
-- contribution to NSS objectives
+- teamwork
+- leadership
+- responsibility
+- social consciousness
+- practical learning
+- overall experience
+- outcomes of the seven-day activity
+- long-term value of such activities
+- contribution to NSS values
+- importance of continuing community-oriented activities
+- final overall assessment
 
+End with a strong professional concluding paragraph.
+
+Do not mention specific locations, names, exact dates or fake statistics.
 
 ======================================================
-FINAL OUTPUT FORMAT
+WRITING STYLE
 ======================================================
 
-Return ONLY these sections in EXACTLY this order:
+Use:
+
+- formal academic English
+- professional report style
+- detailed paragraphs
+- natural transitions
+- meaningful explanations
+- varied sentence structure
+- clear descriptions
+- realistic NSS terminology
+
+Avoid:
+
+- one-line answers
+- short summaries
+- excessive repetition
+- filler sentences
+- fake statistics
+- fake names
+- fake locations
+- fake dates
+- Markdown
+- bullet-point lists
+- image instructions
+
+======================================================
+FINAL OUTPUT
+======================================================
+
+Return ONLY these five sections in EXACTLY this order:
 
 ===OBJECTIVE===
 
-[objective content]
+[500-700 words]
 
 
 ===ACTIVITY_DETAILS===
 
-[activity details content]
+[700-1000 words]
 
 
 ===CHAPTER_3===
 
 DAY 1
 
-[Day 1 content]
+[350-500 words]
 
 
 DAY 2
 
-[Day 2 content]
+[350-500 words]
 
 
 DAY 3
 
-[Day 3 content]
+[350-500 words]
 
 
 DAY 4
 
-[Day 4 content]
+[350-500 words]
 
 
 DAY 5
 
-[Day 5 content]
+[350-500 words]
 
 
 DAY 6
 
-[Day 6 content]
+[350-500 words]
 
 
 DAY 7
 
-[Day 7 content]
+[350-500 words]
 
 
 ===REFLECTION_NOTES===
 
-[reflection content]
+[600-800 words]
 
 
 ===CONCLUSION===
 
-[conclusion content]
+[600-800 words]
 
-Do not omit any section.
-Do not leave any section empty.
-Do not add any text outside these sections.
+DO NOT omit any section.
+
+DO NOT leave any section empty.
+
+DO NOT add anything before the first section.
+
+DO NOT add anything after the conclusion.
+
+Generate the complete report now.
 `;
-
 
   // ====================================================
   // AI PROVIDERS
