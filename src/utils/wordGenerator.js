@@ -37,48 +37,66 @@ const normalParagraph = (text) =>
   });
 
 const createFormattedParagraph = (line) => {
-  const match = line.match(/^(\d+\.\s)?\*\*(.*?)\*\*(.*)$/);
-const numberedHeading =
-  /^\d+\.\s.*:$/.test(line.trim());
+  const cleanLine = (line || "").trim();
 
-if (numberedHeading) {
-  return new Paragraph({
-    spacing: {
-      before: 240,
-      after: 120,
-    },
+  // ==========================================
+  // DAY 1, DAY 2, DAY 3 ... DAY 7
+  // ==========================================
+  if (/^DAY\s+[1-7]\s*:?\s*$/i.test(cleanLine)) {
+    return new Paragraph({
+      alignment: AlignmentType.LEFT,
 
-    children: [
-      new TextRun({
-        text: line,
-        bold: true,
-        font: "Times New Roman",
-        size: 28, // 14pt
-      }),
-    ],
-  });
-}
- if (/^Day\s+\d+:$/i.test(line.trim())) {
-  return new Paragraph({
-    spacing: {
-      before: 240,
-      after: 240,
-    },
+      spacing: {
+        before: 240,
+        after: 180,
+      },
 
-    children: [
-      new TextRun({
-        text: line,
-        bold: true,
-        font: "Times New Roman",
-        size: 28,
-      }),
-    ],
-  });
-}
+      children: [
+        new TextRun({
+          text: cleanLine.replace(/:$/, ""),
+          bold: true,
+          font: "Times New Roman",
+          size: 28,
+        }),
+      ],
+    });
+  }
 
-if (!match) {
-  return normalParagraph((line || "").replace(/\*\*/g, ""));
-}
+  // ==========================================
+  // NUMBERED HEADINGS
+  // ==========================================
+  const numberedHeading =
+    /^\d+\.\s.*:$/.test(cleanLine);
+
+  if (numberedHeading) {
+    return new Paragraph({
+      spacing: {
+        before: 240,
+        after: 120,
+      },
+
+      children: [
+        new TextRun({
+          text: cleanLine,
+          bold: true,
+          font: "Times New Roman",
+          size: 28,
+        }),
+      ],
+    });
+  }
+
+  // ==========================================
+  // BOLD MARKDOWN
+  // ==========================================
+  const match =
+    cleanLine.match(/^(\d+\.\s)?\*\*(.*?)\*\*(.*)$/);
+
+  if (!match) {
+    return normalParagraph(
+      cleanLine.replace(/\*\*/g, "")
+    );
+  }
 
   return new Paragraph({
     alignment: AlignmentType.JUSTIFIED,
@@ -90,7 +108,6 @@ if (!match) {
     },
 
     children: [
-
       new TextRun({
         text: match[1] || "",
         font: "Times New Roman",
@@ -113,6 +130,110 @@ if (!match) {
   });
 };
 
+// ======================================================
+// IMAGE PLACEHOLDER
+// ======================================================
+
+const createImagePlaceholder = (imageBuffer) => {
+  return new Table({
+    width: {
+      size: 100,
+      type: WidthType.PERCENTAGE,
+    },
+
+    borders: {
+      top: {
+        style: "single",
+        size: 8,
+      },
+      bottom: {
+        style: "single",
+        size: 8,
+      },
+      left: {
+        style: "single",
+        size: 8,
+      },
+      right: {
+        style: "single",
+        size: 8,
+      },
+    },
+
+    rows: [
+      new TableRow({
+        children: [
+          new TableCell({
+            width: {
+              size: 100,
+              type: WidthType.PERCENTAGE,
+            },
+
+            verticalAlign: "center",
+
+            children: [
+              new Paragraph({
+                alignment: AlignmentType.CENTER,
+
+                spacing: {
+                  before: 300,
+                  after: 300,
+                },
+
+                children: [
+                  new ImageRun({
+                    data: imageBuffer,
+                    transformation: {
+                      width: 400,
+                      height: 250,
+                    },
+                  }),
+                ],
+              }),
+            ],
+          }),
+        ],
+      }),
+    ],
+  });
+};
+
+
+// ======================================================
+// THREE IMAGE PLACEHOLDERS AFTER EACH DAY
+// ======================================================
+
+const createThreeImagePlaceholders = (imageBuffer) => {
+  return [
+    createImagePlaceholder(imageBuffer),
+
+    new Paragraph({
+      spacing: {
+        before: 100,
+        after: 100,
+      },
+    }),
+
+    createImagePlaceholder(imageBuffer),
+
+    new Paragraph({
+      spacing: {
+        before: 100,
+        after: 100,
+      },
+    }),
+
+    createImagePlaceholder(imageBuffer),
+
+    new Paragraph({
+      spacing: {
+        before: 100,
+        after: 300,
+      },
+    }),
+  ];
+};
+
 export const generateWordDocument = async (
   activityTitle,
   report,
@@ -123,6 +244,7 @@ export const generateWordDocument = async (
     const {
   objective,
   activityDetails,
+  chapter3,
   reflectionNotes,
   conclusion,
 } = report;
@@ -597,41 +719,86 @@ new Table({
 
 
 
-...activityDetails
-  .split("\n")
-  
-  .filter(line => line.trim() !== "")
-  .flatMap((line) => {
-    if (line.trim() === "[PASTE YOUR IMAGE HERE]") {
-  
-  return [
-  new Paragraph({
-    alignment: AlignmentType.CENTER,
-    children: [
-      new ImageRun({
-        data: imageBuffer,
-        transformation: {
-          width: 400,
-          height: 250,
-        },
-      }),
-    ],
-  }),
 
-  new Paragraph({
-    alignment: AlignmentType.CENTER,
-    children: [
-      new TextRun({
-        text: "Fig",
-        size: 24,
-      }),
-    ],
-  }),
-];
-}
-    return [createFormattedParagraph(line)];
-  }),
-      
+// ======================================================
+// CHAPTER 3 - SEVEN DAY ACTIVITY
+// ======================================================
+
+...(() => {
+
+  const text = chapter3 || "";
+
+  const days = text.split(
+    /(?=DAY\s+[1-7]\s*:?\s*$)/gim
+  );
+
+  const output = [];
+
+  days.forEach((dayBlock) => {
+
+    const trimmed = dayBlock.trim();
+
+    if (!trimmed) return;
+
+    const match = trimmed.match(
+      /^(DAY\s+[1-7])\s*:?\s*\n?([\s\S]*)$/i
+    );
+
+    if (!match) return;
+
+    const dayTitle = match[1].toUpperCase();
+    const dayContent = match[2].trim();
+
+    // ------------------------------------------
+    // DAY HEADING
+    // ------------------------------------------
+
+    output.push(
+      new Paragraph({
+        alignment: AlignmentType.LEFT,
+
+        spacing: {
+          before: 300,
+          after: 200,
+        },
+
+        children: [
+          new TextRun({
+            text: dayTitle,
+            bold: true,
+            font: "Times New Roman",
+            size: 30,
+          }),
+        ],
+      })
+    );
+
+    // ------------------------------------------
+    // DAY CONTENT
+    // ------------------------------------------
+
+    dayContent
+      .split(/\n+/)
+      .filter(line => line.trim() !== "")
+      .forEach(line => {
+        output.push(
+          createFormattedParagraph(line)
+        );
+      });
+
+    // ------------------------------------------
+    // THREE IMAGE PLACEHOLDERS
+    // ------------------------------------------
+
+    output.push(
+      ...createThreeImagePlaceholders(imageBuffer)
+    );
+
+  });
+
+  return output;
+
+})(),      
     ],
     
   },
